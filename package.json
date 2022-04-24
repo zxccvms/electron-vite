@@ -26,7 +26,13 @@
 		"static-dev": "yarn run build-dev && electron ./dist/factoryMain.development.js",
 		"check-code": "eslint ./src/**/*.ts ./src/**/*.tsx && tsc",
 		"start": "ts-node config/scripts/start.ts",
-		"build": "ts-node config/scripts/build-main.ts"
+		"build": "ts-node config/scripts/build-main.ts",
+		"prepare": "husky install"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "yarn run check-code"
+		}
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^21.1.0",
@@ -51,6 +57,7 @@
 		"eslint-plugin-jsx-a11y": "^6.5.1",
 		"eslint-plugin-react": "^7.29.4",
 		"eslint-plugin-react-hooks": "^4.4.0",
+		"husky": "^7.0.4",
 		"less": "^4.1.2",
 		"minimist": "^1.2.6",
 		"prettier": "^2.6.2",
