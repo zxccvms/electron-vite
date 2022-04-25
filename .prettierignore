@@ -1,0 +1,6 @@
+/dist/
+/resources/*
+/node_modules/**
+ 
+**/*.svg
+**/*.sh

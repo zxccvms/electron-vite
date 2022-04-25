@@ -1,5 +1,5 @@
 interface ICommandLineParams {
-  mode: EMode
-  bot?: boolean
-  port?: number
+	mode: EMode
+	bot?: boolean
+	port?: number
 }

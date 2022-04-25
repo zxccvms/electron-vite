@@ -1,36 +1,36 @@
-import { BrowserWindow, BrowserWindowConstructorOptions } from "electron"
-import { mergeDeepRight } from "ramda"
+import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron'
+import { mergeDeepRight } from 'ramda'
 
 interface ICreateOptions {
-  src: string
-  wOptions?: Partial<BrowserWindowConstructorOptions>
+	src: string
+	wOptions?: Partial<BrowserWindowConstructorOptions>
 }
 
 interface ICreateWindow {
-  (options: ICreateOptions): BrowserWindow
+	(options: ICreateOptions): BrowserWindow
 }
 
 const createWindow: ICreateWindow = ({ src, wOptions = {} }) => {
-  const win = new BrowserWindow(
-    mergeDeepRight(
-      {
-        width: 0,
-        height: 0
-      },
-      wOptions
-    )
-  )
+	const win = new BrowserWindow(
+		mergeDeepRight(
+			{
+				width: 0,
+				height: 0,
+			},
+			wOptions
+		)
+	)
 
-  const isUrl = src.startsWith("http")
+	const isUrl = src.startsWith('http')
 
-  if (isUrl) win.loadURL(src)
-  else win.loadFile(src)
+	if (isUrl) win.loadURL(src)
+	else win.loadFile(src)
 
-  if (MODE === "development") {
-    win.webContents.openDevTools({ mode: "detach" })
-  }
+	if (MODE === 'development') {
+		win.webContents.openDevTools({ mode: 'detach' })
+	}
 
-  return win
+	return win
 }
 
 export default createWindow

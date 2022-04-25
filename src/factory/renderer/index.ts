@@ -1,2 +1,2 @@
-import "src/common/styles/index.module.less"
-import "./App"
+import 'src/common/styles/index.module.less'
+import './App'

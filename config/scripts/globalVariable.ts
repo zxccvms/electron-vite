@@ -1,6 +1,6 @@
 const getGlobalVariable = ({ mode }: ICommandLineParams) => ({
-  MODE: JSON.stringify(mode),
-  RELEASE_TYPE: JSON.stringify("enterprise")
+	MODE: JSON.stringify(mode),
+	RELEASE_TYPE: JSON.stringify('enterprise'),
 })
 
 export default getGlobalVariable

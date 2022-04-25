@@ -24,17 +24,15 @@
 		"build-main-qa": "rollup --config ./config/rollup.config.main.ts --configPlugin typescript --mode=qa",
 		"build-main-release": "rollup --config ./config/rollup.config.main.ts --configPlugin typescript --mode=production",
 		"static-dev": "yarn run build-dev && electron ./dist/factoryMain.development.js",
+		"format-code": "prettier --write .",
 		"check-code": "eslint ./src/**/*.ts ./src/**/*.tsx && tsc",
 		"start": "ts-node config/scripts/start.ts",
 		"build": "ts-node config/scripts/build-main.ts",
-		"prepare": "husky install"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "yarn run check-code"
-		}
+		"postinstall": "husky install"
 	},
 	"devDependencies": {
+		"@commitlint/cli": "^16.2.3",
+		"@commitlint/config-conventional": "^16.2.1",
 		"@rollup/plugin-commonjs": "^21.1.0",
 		"@rollup/plugin-json": "^4.1.0",
 		"@rollup/plugin-node-resolve": "^13.2.1",
@@ -59,6 +57,7 @@
 		"eslint-plugin-react-hooks": "^4.4.0",
 		"husky": "^7.0.4",
 		"less": "^4.1.2",
+		"lint-staged": "^12.4.0",
 		"minimist": "^1.2.6",
 		"prettier": "^2.6.2",
 		"rimraf": "^3.0.2",
@@ -73,5 +72,9 @@
 		"ramda": "^0.28.0",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0"
+	},
+	"lint-staged": {
+		"*.js": "eslint --cache --fix",
+		"*.{js,css,md}": "prettier --write"
 	}
 }
