@@ -7,6 +7,7 @@ import { getPath, root } from './utils'
 
 export default (params: ICommandLineParams) => {
 	const { mode, port, bot } = params
+	const productName = bot ? 'bot' : 'factory'
 
 	const options: UserConfig = {
 		root,
@@ -39,14 +40,17 @@ export default (params: ICommandLineParams) => {
 			outDir: getPath('./dist'),
 			rollupOptions: {
 				input: {
-					factory: getPath('./src/factory/renderer/index.ts'),
-					factoryServer: getPath('./src/factory/server/index.ts'),
+					window: getPath(`./src/common/windows/index.ts`),
+					[productName]: getPath(`./src/${productName}/renderer/index.ts`),
+					[`${productName}Server`]: getPath(
+						`./src/${productName}/server/index.ts`
+					),
 				},
 				output: {
 					entryFileNames: `[name].${mode}.js`,
 					chunkFileNames: `[name].${mode}.js`,
 					assetFileNames: `[name].[ext]`,
-					format: 'cjs',
+					format: 'esm',
 				},
 				external: ['electron'], // 不打包 electron
 				plugins: [copyAsset(params)],

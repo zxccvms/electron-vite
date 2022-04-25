@@ -11,6 +11,20 @@ const copy = ({ mode, bot }: ICommandLineParams) => {
 		verbose: true,
 		targets: [
 			{
+				src: `window.html`,
+				dest: getPath('./dist'),
+				transform: contentBuffer => {
+					const content = contentBuffer.toString()
+					return content
+						.replace(/<head>((.|\s)*)<\/head>/m, (_, headContent) => {
+							return `<head>${headContent}
+		<link rel="stylesheet" href="./window.css" />
+	</head>`
+						})
+						.replace(`./src/common/windows/index.ts`, `./window.${mode}.js`)
+				},
+			},
+			{
 				src: `${projectName}.html`,
 				dest: getPath('./dist'),
 				transform: contentBuffer => {
@@ -21,7 +35,6 @@ const copy = ({ mode, bot }: ICommandLineParams) => {
 		<link rel="stylesheet" href="./${projectName}.css" />
 	</head>`
 						})
-						.replace(/<script type="module"/g, '<script')
 						.replace(
 							`./src/${projectName}/renderer/index.ts`,
 							`./${projectName}.${mode}.js`

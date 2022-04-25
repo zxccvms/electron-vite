@@ -14,16 +14,14 @@ const builtins = () =>
 
 export default (params: ICommandLineParams) => {
 	const { mode, bot } = params
+	const productName = bot ? 'bot' : 'factory'
+
 	const options: RollupOptions = {
-		input: bot
-			? getPath('./src/bot/main/index.ts')
-			: getPath('./src/factory/main/index.ts'),
+		input: getPath(`./src/${productName}/main/index.ts`),
 		output: {
-			file: bot
-				? getPath(`./dist/botMain.${mode}.js`)
-				: getPath(`./dist/factoryMain.${mode}.js`),
-			format: 'cjs', // 使用 CommonJs 模块化
 			sourcemap: true,
+			file: getPath(`./dist/main.js`),
+			format: 'cjs', // 使用 CommonJs 模块化
 		},
 		plugins: [
 			nodeResolve(), // 支持 node_modules 下面的包查找

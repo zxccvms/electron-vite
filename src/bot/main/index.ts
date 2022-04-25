@@ -4,17 +4,15 @@ import createWindow from 'src/common/base/electron/createWindow'
 app.whenReady().then(() => {
 	createWindow({
 		src: app.isPackaged
-			? './botServer.html'
+			? './dist/botServer.html'
 			: 'http://localhost:3334/botServer.html',
-		// src: "./botServer.html",
 		wOptions: {
 			show: false,
 		},
 	})
 
 	createWindow({
-		src: app.isPackaged ? './bot.html' : 'http://localhost:3334/bot.html',
-		// src: "./bot.html",
+		src: app.isPackaged ? './dist/bot.html' : 'http://localhost:3334/bot.html',
 		wOptions: {
 			width: 800,
 			height: 800,

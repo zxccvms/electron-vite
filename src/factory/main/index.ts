@@ -4,9 +4,8 @@ import createWindow from 'src/common/base/electron/createWindow'
 app.whenReady().then(() => {
 	createWindow({
 		src: app.isPackaged
-			? './factoryServer.html'
+			? './dist/factoryServer.html'
 			: 'http://localhost:3333/factoryServer.html',
-		// src: "./factoryServer.html",
 		wOptions: {
 			show: false,
 		},
@@ -14,9 +13,8 @@ app.whenReady().then(() => {
 
 	createWindow({
 		src: app.isPackaged
-			? './factory.html'
+			? './dist/factory.html'
 			: 'http://localhost:3333/factory.html',
-		// src: "./factory.html",
 		wOptions: {
 			width: 800,
 			height: 800,
