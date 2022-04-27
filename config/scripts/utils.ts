@@ -17,6 +17,8 @@ export async function startRenderer(commandLineParams: ICommandLineParams) {
 
 /** 启动主进程 */
 export async function startMain(commandLineParams: ICommandLineParams) {
+	// 关闭electron安全警告
+	process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 	const options = getMainOptions(commandLineParams)
 	const watcher = watch(options)
 
