@@ -11,7 +11,7 @@ app.whenReady().then(() => {
 		},
 	})
 
-	createWindow({
+	const mainWindow = createWindow({
 		src: app.isPackaged
 			? './dist/factory.html'
 			: 'http://localhost:3333/factory.html',
@@ -20,10 +20,8 @@ app.whenReady().then(() => {
 			height: 800,
 		},
 	})
-})
 
-app.on('window-all-closed', () => {
-	if (process.platform !== 'darwin') {
+	mainWindow.on('closed', () => {
 		app.quit()
-	}
+	})
 })

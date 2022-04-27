@@ -2,8 +2,8 @@ import { UserConfig } from 'vite'
 import electron from './plugins/vite-plugin-electron'
 import react from '@vitejs/plugin-react'
 import globalVariableMap from './scripts/globalVariable'
-import copyAsset from './plugins/rollup-copy-asset'
 import { getPath, root } from './utils'
+import copy from 'rollup-plugin-copy'
 
 export default (params: ICommandLineParams) => {
 	const { mode, port, bot } = params
@@ -12,6 +12,7 @@ export default (params: ICommandLineParams) => {
 	const options: UserConfig = {
 		root,
 		mode,
+		base: './',
 		define: globalVariableMap(params),
 		resolve: {
 			alias: {
@@ -40,11 +41,9 @@ export default (params: ICommandLineParams) => {
 			outDir: getPath('./dist'),
 			rollupOptions: {
 				input: {
-					window: getPath(`./src/common/windows/index.ts`),
-					[productName]: getPath(`./src/${productName}/renderer/index.ts`),
-					[`${productName}Server`]: getPath(
-						`./src/${productName}/server/index.ts`
-					),
+					window: getPath(`window.html`),
+					[productName]: getPath(`${productName}.html`),
+					[`${productName}Server`]: getPath(`${productName}Server.html`),
 				},
 				output: {
 					entryFileNames: `[name].${mode}.js`,
@@ -53,7 +52,21 @@ export default (params: ICommandLineParams) => {
 					format: 'esm',
 				},
 				external: ['electron'], // 不打包 electron
-				plugins: [copyAsset(params)],
+				plugins: [
+					copy({
+						verbose: true,
+						targets: [
+							{
+								src: `resources/${productName}`,
+								dest: getPath('./dist/resources'),
+							},
+							{
+								src: 'resources/common',
+								dest: getPath('./dist/resources'),
+							},
+						],
+					}),
+				],
 			},
 		},
 		optimizeDeps: {

@@ -15,7 +15,7 @@
 		"package": "yarn run build &&  ts-node build/build.ts",
 		"static-start": "yarn run build && electron ./dist/main.js",
 		"format-code": "prettier --write .",
-		"check-code": "eslint ./src/**/*.ts ./src/**/*.tsx && tsc",
+		"check-code": "eslint --fix src/ && tsc",
 		"postinstall": "husky install"
 	},
 	"devDependencies": {
