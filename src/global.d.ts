@@ -18,3 +18,4 @@ declare const enum EMode {
 
 declare const MODE: EMode
 declare const RELEASE_TYPE: 'develop' | 'product'
+declare const noop: () => void

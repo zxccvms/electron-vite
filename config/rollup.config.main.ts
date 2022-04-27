@@ -6,6 +6,7 @@ import typescript from '@rollup/plugin-typescript'
 import json from '@rollup/plugin-json'
 import replace from '@rollup/plugin-replace'
 import getGlobalVariable from './scripts/globalVariable'
+import inject from '@rollup/plugin-inject'
 import { getPath } from './utils'
 
 /** node.js builtins module */
@@ -33,6 +34,11 @@ export default (params: ICommandLineParams) => {
 			replace({
 				...getGlobalVariable(params),
 				preventAssignment: true,
+			}),
+			inject({
+				sourceMap: true,
+				include: /\.[tj]sx?$/,
+				noop: getPath('./src/common/base/utils/noop.ts'),
 			}),
 		],
 		external: [

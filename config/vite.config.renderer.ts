@@ -1,8 +1,9 @@
 import { UserConfig } from 'vite'
-import electron from './plugins/vite-plugin-electron'
-import react from '@vitejs/plugin-react'
 import globalVariableMap from './scripts/globalVariable'
 import { getPath, root } from './utils'
+import electron from './plugins/vite-plugin-electron'
+import react from '@vitejs/plugin-react'
+import inject from '@rollup/plugin-inject'
 import copy from 'rollup-plugin-copy'
 
 export default (params: ICommandLineParams) => {
@@ -20,7 +21,15 @@ export default (params: ICommandLineParams) => {
 				resources: getPath('./resources'),
 			},
 		},
-		plugins: [electron(), react()],
+		plugins: [
+			electron(),
+			react(),
+			inject({
+				sourceMap: true,
+				include: /\.[tj]sx?$/,
+				noop: getPath('./src/common/base/utils/noop.ts'),
+			}),
+		],
 		server: {
 			port,
 			strictPort: true,

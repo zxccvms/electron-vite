@@ -1,6 +1,8 @@
 import { app } from 'electron'
 import createWindow from 'src/common/base/electron/createWindow'
 
+console.log(noop)
+
 app.whenReady().then(() => {
 	createWindow({
 		src: app.isPackaged
