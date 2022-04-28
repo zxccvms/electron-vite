@@ -9,8 +9,8 @@ import defineGlobalVariable from './scripts/globalVariable'
 import inject from './plugins/rollup-plugin-inject'
 import { getPath } from './utils'
 
-/** node.js builtins module */
-const builtins = () =>
+/** node.js builtin module */
+const builtin = () =>
 	builtinModules.filter(x => !/^_|^(internal|v8|node-inspect)\/|\//.test(x))
 
 export default (params: ICommandLineParams) => {
@@ -39,7 +39,7 @@ export default (params: ICommandLineParams) => {
 		],
 		external: [
 			// 打包避开内置模块
-			...builtins(),
+			...builtin(),
 			'electron',
 		],
 	}

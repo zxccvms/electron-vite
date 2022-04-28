@@ -1,22 +1,23 @@
 import * as acorn from 'acorn'
 import { Plugin } from 'vite'
 import path from 'path'
+import { builtinModules } from 'module'
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'] // 需要处理的文件后缀
 
-export interface Esm2cjsOptions {
+export interface IEsmToCjsOptions {
 	excludes?: string[] // 需要被转换的模块
 }
 
-export default function esm2cjs(options?: Esm2cjsOptions): Plugin {
-	const opts: Esm2cjsOptions = {
-		// 默认我们转换 electron、electron-store 两个模块
-		excludes: ['electron', 'electron-store'],
+/** 将esm的导入方式改为cmj导入方式 */
+export default function esmToCjs(options?: IEsmToCjsOptions): Plugin {
+	const opts: IEsmToCjsOptions = {
+		excludes: ['electron', ...builtinModules],
 		...options,
 	}
 
 	return {
-		name: 'vitejs-plugin-electron', // 这个 name 就是插件名字
+		name: 'vitejs-plugin-esmToCjs', // 这个 name 就是插件名字
 		transform(code, id) {
 			const parsed = path.parse(id) // 解析引入模块的路径，id 即引入文件完整路径
 			if (!extensions.includes(parsed.ext)) return // 只处理需要处理的文件后缀

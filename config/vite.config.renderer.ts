@@ -1,7 +1,7 @@
 import { UserConfig } from 'vite'
 import defineGlobalVariable from './scripts/globalVariable'
 import { getPath, root } from './utils'
-import electron from './plugins/vite-plugin-electron'
+import esmToCjs from './plugins/vite-plugin-esmToCjs'
 import react from '@vitejs/plugin-react'
 import inject from './plugins/rollup-plugin-inject'
 import copy from 'rollup-plugin-copy'
@@ -21,7 +21,7 @@ export default (params: ICommandLineParams) => {
 				resources: getPath('./resources'),
 			},
 		},
-		plugins: [electron(), react(), inject()],
+		plugins: [esmToCjs(), react(), inject()],
 		server: {
 			port,
 			strictPort: true,

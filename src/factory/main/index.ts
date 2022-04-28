@@ -9,20 +9,21 @@ app.whenReady().then(() => {
 		wOptions: {
 			show: false,
 			webPreferences: {
+				contextIsolation: false,
 				nodeIntegration: true,
 			},
 		},
 	})
 
-	createWindow({
-		src: app.isPackaged
-			? './dist/window.html'
-			: `http://localhost:3333/window.html`,
-		wOptions: {
-			width: 800,
-			height: 800,
-		},
-	})
+	// createWindow({
+	// 	src: app.isPackaged
+	// 		? './dist/window.html'
+	// 		: `http://localhost:3333/window.html`,
+	// 	wOptions: {
+	// 		width: 800,
+	// 		height: 800,
+	// 	},
+	// })
 
 	const mainWindow = createWindow({
 		src: app.isPackaged
