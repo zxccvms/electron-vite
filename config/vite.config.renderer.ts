@@ -1,9 +1,9 @@
 import { UserConfig } from 'vite'
-import globalVariableMap from './scripts/globalVariable'
+import defineGlobalVariable from './scripts/globalVariable'
 import { getPath, root } from './utils'
 import electron from './plugins/vite-plugin-electron'
 import react from '@vitejs/plugin-react'
-import inject from '@rollup/plugin-inject'
+import inject from './plugins/rollup-plugin-inject'
 import copy from 'rollup-plugin-copy'
 
 export default (params: ICommandLineParams) => {
@@ -14,22 +14,14 @@ export default (params: ICommandLineParams) => {
 		root,
 		mode,
 		base: './',
-		define: globalVariableMap(params),
+		define: defineGlobalVariable(params),
 		resolve: {
 			alias: {
 				src: getPath('./src'),
 				resources: getPath('./resources'),
 			},
 		},
-		plugins: [
-			electron(),
-			react(),
-			inject({
-				sourceMap: true,
-				include: /\.[tj]sx?$/,
-				noop: getPath('./src/common/base/utils/noop.ts'),
-			}),
-		],
+		plugins: [electron(), react(), inject()],
 		server: {
 			port,
 			strictPort: true,

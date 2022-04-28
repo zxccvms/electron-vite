@@ -5,8 +5,8 @@ import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
 import json from '@rollup/plugin-json'
 import replace from '@rollup/plugin-replace'
-import getGlobalVariable from './scripts/globalVariable'
-import inject from '@rollup/plugin-inject'
+import defineGlobalVariable from './scripts/globalVariable'
+import inject from './plugins/rollup-plugin-inject'
 import { getPath } from './utils'
 
 /** node.js builtins module */
@@ -32,14 +32,10 @@ export default (params: ICommandLineParams) => {
 				module: 'ESNext', // 支持 typescript
 			}),
 			replace({
-				...getGlobalVariable(params),
+				...defineGlobalVariable(params),
 				preventAssignment: true,
 			}),
-			inject({
-				sourceMap: true,
-				include: /\.[tj]sx?$/,
-				noop: getPath('./src/common/base/utils/noop.ts'),
-			}),
+			inject(),
 		],
 		external: [
 			// 打包避开内置模块

@@ -1,13 +1,10 @@
 import ReactDOM from 'react-dom/client'
+import { EWindowName } from 'src/global.enum'
 
 import classMap from './app.module.less'
 
-import test from 'src/common/base/react/test'
-import test1 from 'src/common/base/react/test1'
-
-console.log(`taozhizhu ~🚀 file: App.tsx ~🚀 line 6 ~🚀 test`, test)
-console.log(`taozhizhu ~🚀 file: App.tsx ~🚀 line 7 ~🚀 test1`, test1)
 console.log(`taozhizhu ~🚀 file: App.tsx ~🚀 line 7 ~🚀 noop`, noop)
+console.log(`taozhizhu ~🚀 file: App.tsx ~🚀 line 7 ~🚀 test`, EWindowName.test)
 
 interface IProps {}
 

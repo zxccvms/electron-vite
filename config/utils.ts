@@ -1,6 +1,7 @@
 import cliColor from 'cli-color'
 import minimist from 'minimist'
 import path from 'path'
+import { EMode } from '../src/global.enum'
 
 export const root = path.join(__dirname, '..')
 export const getPath = (relativePath: string) => path.join(root, relativePath)
@@ -16,9 +17,9 @@ export const printToTerminal = (
 	content: string,
 	color: 'white' | 'yellow' | 'red' = 'white'
 ) => {
-	if (!content) return
-	const cliColorField = ECliColorField[type]
+	if (!content.trim()) return
 
+	const cliColorField = ECliColorField[type]
 	const prefix = cliColor[cliColorField](`[${type}]`)
 	const outContent = cliColor[color](content)
 	console.log(prefix + outContent)

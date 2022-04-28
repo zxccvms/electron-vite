@@ -1,11 +1,9 @@
 import * as builder from 'electron-builder'
 import { printToTerminal } from '../config/utils'
 
-printToTerminal
-
 /** https://www.electron.build/configuration/configuration */
 const options: builder.Configuration = {
-	asar: false,
+	// asar: false,
 	protocols: {
 		name: 'Deeplink Example',
 		// Don't forget to set `MimeType: "x-scheme-handler/deeplink"` for `linux.desktop` entry!
