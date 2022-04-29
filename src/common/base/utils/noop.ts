@@ -1,2 +1,5 @@
+/** 空函数 */
 // eslint-disable-next-line @typescript-eslint/no-empty-function
-export default () => {}
+const noop = () => {}
+
+export default noop

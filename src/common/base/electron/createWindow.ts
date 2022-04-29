@@ -6,11 +6,7 @@ interface ICreateOptions {
 	wOptions?: Partial<BrowserWindowConstructorOptions>
 }
 
-interface ICreateWindow {
-	(options: ICreateOptions): BrowserWindow
-}
-
-const createWindow: ICreateWindow = ({ src, wOptions = {} }) => {
+const createWindow = ({ src, wOptions = {} }: ICreateOptions) => {
 	const win = new BrowserWindow(
 		mergeDeepRight(
 			{

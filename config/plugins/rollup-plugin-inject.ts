@@ -7,6 +7,7 @@ const injectWrapper = () => {
 		sourceMap: true,
 		include: /\.[tj]sx?$/,
 		noop: getPath('./src/common/base/utils/noop.ts'),
+		randomString: getPath('./src/common/base/utils/randomString.ts'),
 	})
 }
 

@@ -1,13 +1,15 @@
-import { app } from 'electron'
+import { app, ipcMain, MessageChannelMain } from 'electron'
 import createWindow from 'src/common/base/electron/createWindow'
 
 app.whenReady().then(() => {
-	createWindow({
+	const serverWin = createWindow({
 		src: app.isPackaged
 			? './dist/factoryServer.html'
 			: 'http://localhost:3333/factoryServer.html',
 		wOptions: {
-			show: false,
+			// show: false,
+			width: 800,
+			height: 800,
 			webPreferences: {
 				contextIsolation: false,
 				nodeIntegration: true,
@@ -32,7 +34,17 @@ app.whenReady().then(() => {
 		wOptions: {
 			width: 800,
 			height: 800,
+			webPreferences: {
+				contextIsolation: false,
+				nodeIntegration: true,
+			},
 		},
+	})
+
+	ipcMain.on('create-port', () => {
+		const { port1, port2 } = new MessageChannelMain()
+		serverWin.webContents.postMessage('send-port', null, [port1])
+		mainWindow.webContents.postMessage('send-port', null, [port2])
 	})
 
 	mainWindow.on('closed', () => {

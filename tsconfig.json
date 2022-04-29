@@ -102,7 +102,8 @@
 		/* Completeness */
 		// "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
 		"skipLibCheck": true /* Skip type checking all .d.ts files. */,
-		"plugins": [{ "name": "typescript-plugin-css-modules" }]
+		"plugins": [{ "name": "typescript-plugin-css-modules" }],
+		"suppressImplicitAnyIndexErrors": true
 	},
 	"include": ["src/**/*", "config/**/*.ts", "build/**/*.ts"],
 	"exclude": ["node_module/**/*", "dist/**/*"],
